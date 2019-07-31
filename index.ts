@@ -1,4 +1,4 @@
-import program from "commander";
+import program, { CommanderStatic } from "commander";
 
 program
   .version("0.0.1")
@@ -13,11 +13,11 @@ program
   )
   .parse(process.argv);
 
-export default function main({ source }) {
+export default function main({ source, outputHelp }: CommanderStatic): void {
   try {
   } catch (e) {
     console.error(e.message);
-    program.outputHelp();
+    outputHelp();
     process.exit(2);
   }
 }
