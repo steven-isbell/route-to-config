@@ -1,4 +1,5 @@
 import program, { CommanderStatic } from "commander";
+import fs from 'fs';
 
 program
   .version("0.0.1")
@@ -15,6 +16,7 @@ program
 
 export default function main({ source, outputHelp }: CommanderStatic): void {
   try {
+    
   } catch (e) {
     console.error(e.message);
     outputHelp();
