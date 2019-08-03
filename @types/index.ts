@@ -1,1 +1,1 @@
-export { default as ValidateFile} from './ValidateFile';
+export { default as ValidateFileOutput} from './ValidateFileOutput';

@@ -1,7 +1,6 @@
 import program, { CommanderStatic } from "commander";
-import fs from 'fs';
-import validateFile from "./utils/validateFile";
-import { ValidateFile } from "./@types";
+import { validateFile, writeRouteConfig } from "./utils";
+import { ValidateFileOutput } from "./@types";
 
 program
   .version("0.0.1")
@@ -11,15 +10,17 @@ program
     "The name of the output file. Defaults to routes.js."
   )
   .option(
-    "-p, --path",
+    "-p, --output-path",
     "The output path. Defaults to the directory command was executed in."
   )
   .parse(process.argv);
 
-export default function main({ source, outputHelp }: CommanderStatic): void {
+export default function main({ source, outputHelp, outputFile, outputPath }: CommanderStatic): void {
   try {
-    const { isValid, error }: ValidateFile = validateFile(source);
+    const { isValid, error }: ValidateFileOutput = validateFile(source);
     if(!isValid) throw new Error(error);
+    const outputLocation: string = outputPath ? `${outputPath}${outputFile}` : `${__dirname}${outputFile}`;
+    writeRouteConfig(outputLocation, '');
   } catch (e) {
     console.error(e.message);
     outputHelp();
