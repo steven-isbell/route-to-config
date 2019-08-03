@@ -1,6 +1,7 @@
 import program, { CommanderStatic } from "commander";
 import fs from 'fs';
 import validateFile from "./utils/validateFile";
+import { ValidateFile } from "./@types";
 
 program
   .version("0.0.1")
@@ -17,10 +18,8 @@ program
 
 export default function main({ source, outputHelp }: CommanderStatic): void {
   try {
-    const isValid: boolean = validateFile(source);
-    if(isValid) {
-      
-    }
+    const { isValid, error }: ValidateFile = validateFile(source);
+    if(!isValid) throw new Error(error);
   } catch (e) {
     console.error(e.message);
     outputHelp();
