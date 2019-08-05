@@ -1,5 +1,7 @@
 import program, { CommanderStatic } from "commander";
-import { validateFile, writeRouteConfig } from "./utils";
+import fs from 'fs';
+
+import { parseRoutes, validateFile, writeRouteConfig } from "./utils";
 import { ValidateFileOutput } from "./@types";
 
 program
