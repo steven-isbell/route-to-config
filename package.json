@@ -10,7 +10,8 @@
   "main": "./lib/index.js",
   "scripts": {
     "test": "yarn test",
-    "format": "prettier --write"
+    "format": "prettier --write",
+    "start": "concurrently --kill-others \"tsc -w\" \"nodemon lib/\""
   },
   "author": "Steven Isbell <steven.isbell18@gmail.com>",
   "license": "MIT",
@@ -24,6 +25,7 @@
   "devDependencies": {
     "@types/commander": "^2.12.2",
     "@types/node": "^12.6.8",
+    "concurrently": "^4.1.1",
     "prettier": "^1.18.2"
   }
 }
