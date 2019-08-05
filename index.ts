@@ -21,7 +21,7 @@ export default function main({ source, outputHelp, outputFile, outputPath }: Com
   try {
     const { isValid, error }: ValidateFileOutput = validateFile(source);
     if (!isValid) throw new Error(error);
-    const parsedFile = fs.readFileSync(source, 'utf8');
+    const parsedFile: string = fs.readFileSync(source, 'utf8');
     const routeConfig: RouteConfig[] = parseRoutes(parsedFile)
     const outputLocation: string = outputPath ? `${outputPath}${outputFile}` : `${__dirname}${outputFile}`;
     writeRouteConfig(outputLocation, '');
@@ -31,3 +31,7 @@ export default function main({ source, outputHelp, outputFile, outputPath }: Com
     process.exit(2);
   }
 }
+
+/**
+ * @todo Add Readme with examples
+ */
