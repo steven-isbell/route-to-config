@@ -20,7 +20,7 @@ program
 export default function main({ source, outputHelp, outputFile, outputPath }: CommanderStatic): void {
   try {
     const { isValid, error }: ValidateFileOutput = validateFile(source);
-    if(!isValid) throw new Error(error);
+    if (!isValid) throw new Error(error);
     const outputLocation: string = outputPath ? `${outputPath}${outputFile}` : `${__dirname}${outputFile}`;
     writeRouteConfig(outputLocation, '');
   } catch (e) {
