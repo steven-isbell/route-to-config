@@ -11,7 +11,7 @@
   "scripts": {
     "test": "yarn test",
     "format": "prettier --write",
-    "start": "concurrently --kill-others \"tsc -w\" \"nodemon lib/\""
+    "dev": "concurrently --kill-others \"tsc -w\" \"nodemon lib/\""
   },
   "author": "Steven Isbell <steven.isbell18@gmail.com>",
   "license": "MIT",
