@@ -2,7 +2,7 @@ import program, { CommanderStatic } from "commander";
 import fs from 'fs';
 
 import { parseRoutes, validateFile, writeRouteConfig } from "./utils";
-import { ValidateFileOutput } from "./@types";
+import { RouteConfig, ValidateFileOutput } from "./@types";
 
 program
   .version("0.0.1")
@@ -21,6 +21,8 @@ export default function main({ source, outputHelp, outputFile, outputPath }: Com
   try {
     const { isValid, error }: ValidateFileOutput = validateFile(source);
     if (!isValid) throw new Error(error);
+    const parsedFile = fs.readFileSync(source, 'utf8');
+    const routeConfig: RouteConfig[] = parseRoutes(parsedFile)
     const outputLocation: string = outputPath ? `${outputPath}${outputFile}` : `${__dirname}${outputFile}`;
     writeRouteConfig(outputLocation, '');
   } catch (e) {

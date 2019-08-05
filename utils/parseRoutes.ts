@@ -1,4 +1,4 @@
-function parseRoutes() {
+function parseRoutes(file: string) {
 
 }
 
