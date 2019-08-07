@@ -22,9 +22,9 @@ export default function main({ source, outputHelp, outputFile, outputPath }: Com
     const { isValid, error }: ValidateFileOutput = validateFile(source);
     if (!isValid) throw new Error(error);
     const parsedFile: string = fs.readFileSync(source, 'utf8');
-    const routeConfig: RouteConfig[] = parseRoutes(parsedFile)
+    const routeConfig: RouteConfig[] = parseRoutes(parsedFile);
     const outputLocation: string = outputPath ? `${outputPath}${outputFile}` : `${__dirname}${outputFile}`;
-    writeRouteConfig(outputLocation, '');
+    // writeRouteConfig(outputLocation, '');
   } catch (e) {
     console.error(e.message);
     outputHelp();

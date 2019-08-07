@@ -1,7 +1,10 @@
 function parseRoutes(file: string) {
-  /**
-   * @todo parse lines and write to config for each route
-   */
+  console.log(file);
+  return [{
+    path: 'string',
+    component: 'string',
+    exact: true
+  }]
 }
 
 export default parseRoutes;
