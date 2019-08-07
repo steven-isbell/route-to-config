@@ -8,13 +8,13 @@ import { RouteConfig, ValidateFileOutput } from "./@types";
 
 program
   .version("0.0.1")
-  .option("-s, --source [file]", "The file to convert.")
+  .option("-S, --source [file]", "The file to convert.")
   .option(
-    "-n, --output-file [fileName]",
+    "-N, --output-file [fileName]",
     "The name of the output file. Defaults to routes.js."
   )
   .option(
-    "-p, --output-path",
+    "-P, --output-path",
     "The output path. Defaults to the directory command was executed in."
   )
   .parse(process.argv);

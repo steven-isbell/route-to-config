@@ -15,7 +15,7 @@
     "watch": "tsc -w"
   },
   "bin": {
-    "route-to-config": "./lib/cli.js"
+    "react-route-to-config": "./lib/cli.js"
   },
   "author": "Steven Isbell <steven.isbell18@gmail.com>",
   "license": "MIT",
