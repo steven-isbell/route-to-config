@@ -11,7 +11,7 @@
   "scripts": {
     "test": "yarn test",
     "format": "prettier --write",
-    "build": "tsc",
+    "build": "tsc && chmod +x lib/cli.js",
     "watch": "tsc -w"
   },
   "bin": {

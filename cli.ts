@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 import program, { CommanderStatic } from "commander";
 import fs from 'fs';
 
@@ -17,7 +19,7 @@ program
   )
   .parse(process.argv);
 
-export default function main({ source, outputHelp, outputFile, outputPath }: CommanderStatic): void {
+(function main({ source, outputHelp, outputFile, outputPath }: CommanderStatic): void {
   try {
     const { isValid, error }: ValidateFileOutput = validateFile(source);
     if (!isValid) throw new Error(error);
@@ -30,7 +32,7 @@ export default function main({ source, outputHelp, outputFile, outputPath }: Com
     outputHelp();
     process.exit(2);
   }
-}
+})(program);
 
 /**
  * @todo Add Readme with examples
