@@ -1,8 +1,8 @@
-import fs from 'fs';
+// import fs from 'fs';
 
 function writeRouteConfig(outputLocation: string, data: string) {
-  fs.writeFileSync(outputLocation, data);
-  console.log(`File written to ${outputLocation}`);
+  // fs.writeFileSync(outputLocation, data);
+  console.log(`File written to ${outputLocation}`, data);
   process.exit(1);
 }
 
