@@ -1,10 +1,16 @@
+import parser from '@babel/parser';
+
 function parseRoutes(file: string) {
-  console.log(file);
+  const parsedFile = parser.parse(file, {
+    sourceType: 'module',
+    plugins: ['jsx']
+  });
+  console.log(parsedFile);
   return [{
     path: 'string',
     component: 'string',
     exact: true
-  }]
+  }];
 }
 
 export default parseRoutes;

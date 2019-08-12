@@ -26,7 +26,7 @@ program
     const parsedFile: string = fs.readFileSync(source, 'utf8');
     const routeConfig: RouteConfig[] = parseRoutes(parsedFile);
     const outputLocation: string = outputPath ? `${outputPath}${outputFile}` : `${__dirname}${outputFile}`;
-    // writeRouteConfig(outputLocation, '');
+    writeRouteConfig(outputLocation, JSON.stringify(routeConfig));
   } catch (e) {
     console.error(e.message);
     outputHelp();
