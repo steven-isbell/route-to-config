@@ -1,4 +1,11 @@
 import * as parser from '@babel/parser';
+import { Node } from '@babel/types';
+
+function noop() {}
+
+function walk(node: Node, cb: Function = noop) {
+  if (node.type === 'JSXElement') {}
+}
 
 function parseRoutes(file: string) {
   const parsedFile = parser.parse(file, {
