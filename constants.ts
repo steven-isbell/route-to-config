@@ -1,1 +1,1 @@
-export const VALID_EXTENSIONS = ['.js', '.jsx'];
+export const VALID_EXTENSIONS = ['js', 'jsx'];

@@ -19,17 +19,16 @@ program
   )
   .parse(process.argv);
 
-(function main({ source, outputHelp, outputFile, outputPath }: CommanderStatic): void {
+(function main({ source, outputFile, outputPath }: CommanderStatic): void {
   try {
     const { isValid, error }: ValidateFileOutput = validateFile(source);
     if (!isValid) throw new Error(error);
     const parsedFile: string = fs.readFileSync(source, 'utf8');
     const routeConfig: RouteConfig[] = parseRoutes(parsedFile);
-    const outputLocation: string = outputPath ? `${outputPath}${outputFile}` : `${__dirname}${outputFile}`;
+    const outputLocation: string = outputPath ? `${outputPath}/${outputFile}`.replace(/\/\//g, '/') : `${__dirname}/${outputFile}`;
     writeRouteConfig(outputLocation, JSON.stringify(routeConfig));
   } catch (e) {
     console.error(e.message);
-    outputHelp();
     process.exit(2);
   }
 })(program);

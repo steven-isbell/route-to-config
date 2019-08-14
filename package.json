@@ -24,10 +24,10 @@
     "url": "git+https://github.com/steven-isbell/route-to-config.git"
   },
   "dependencies": {
+    "@babel/parser": "^7.5.5",
     "commander": "^2.20.0"
   },
   "devDependencies": {
-    "@babel/parser": "^7.5.5",
     "@babel/types": "^7.5.5",
     "@types/node": "^12.6.8",
     "prettier": "^1.18.2"

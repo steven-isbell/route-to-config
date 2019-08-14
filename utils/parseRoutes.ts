@@ -1,4 +1,4 @@
-import parser from '@babel/parser';
+import * as parser from '@babel/parser';
 
 function parseRoutes(file: string) {
   const parsedFile = parser.parse(file, {
