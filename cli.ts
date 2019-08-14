@@ -20,12 +20,13 @@ program
   .parse(process.argv);
 
 (function main({ source, outputFile, outputPath }: CommanderStatic): void {
+  const actualOutputFile = outputFile || 'routes.js';
   try {
     const { isValid, error }: ValidateFileOutput = validateFile(source);
     if (!isValid) throw new Error(error);
     const parsedFile: string = fs.readFileSync(source, 'utf8');
     const routeConfig: RouteConfig[] = parseRoutes(parsedFile);
-    const outputLocation: string = outputPath ? `${outputPath}/${outputFile}`.replace(/\/\//g, '/') : `${__dirname}/${outputFile}`;
+    const outputLocation: string = outputPath ? `${outputPath}/${actualOutputFile}`.replace(/\/\//g, '/') : `${__dirname}/${actualOutputFile}`;
     writeRouteConfig(outputLocation, JSON.stringify(routeConfig));
   } catch (e) {
     console.error(e.message);

@@ -5,7 +5,7 @@ function parseRoutes(file: string) {
     sourceType: 'module',
     plugins: ['jsx']
   });
-  console.log(parsedFile);
+  console.log(parsedFile.program.body[0]);
   return [{
     path: 'string',
     component: 'string',
