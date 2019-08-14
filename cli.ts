@@ -10,7 +10,7 @@ program
   .version("0.0.1")
   .option("-S, --source [file]", "The file to convert.")
   .option(
-    "-N, --output-file [fileName]",
+    "-O, --output-file [fileName]",
     "The name of the output file. Defaults to routes.js."
   )
   .option(

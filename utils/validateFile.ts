@@ -4,8 +4,8 @@ import { VALID_EXTENSIONS } from '../constants';
 import { ValidateFileOutput } from "../@types";
 
 function validateFile(filePath: string): ValidateFileOutput {
-  const extension: string = filePath.slice().split('.').pop() || '';
   const exists: boolean = fs.existsSync(filePath);
+  const extension: string = filePath.slice().split('.').pop() || '';
   const isValidExtension: boolean = VALID_EXTENSIONS.includes(extension);
   if (exists && isValidExtension) return { isValid: true };
   return {
