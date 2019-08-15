@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+
 import program, { CommanderStatic } from "commander";
 import fs from 'fs';
 

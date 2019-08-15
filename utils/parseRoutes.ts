@@ -4,7 +4,10 @@ import { Node } from '@babel/types';
 function noop() {}
 
 function walk(node: Node, cb: Function = noop) {
-  if (node.type === 'JSXElement') {}
+  if (node.type === 'JSXElement') {
+    console.dir(node.children);
+  }
+  
 }
 
 function parseRoutes(file: string) {
@@ -12,7 +15,9 @@ function parseRoutes(file: string) {
     sourceType: 'module',
     plugins: ['jsx']
   });
-  console.log(parsedFile.program.body[0]);
+  // walk(parsedFile.program.body[0]);
+  // @ts-ignore
+  console.log(parsedFile.program.body[0].expression.children[1].openingElement.attributes[2].value);
   return [{
     path: 'string',
     component: 'string',
