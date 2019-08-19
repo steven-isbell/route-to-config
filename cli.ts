@@ -33,7 +33,3 @@ program
     process.exit(2);
   }
 })(program);
-
-/**
- * @todo Add Readme with examples
- */
