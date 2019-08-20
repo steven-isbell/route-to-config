@@ -5,9 +5,10 @@ import fs from 'fs';
 
 import { parseRoutes, validateFile, writeRouteConfig } from "./utils";
 import { RouteConfig, ValidateFileOutput } from "./@types";
+import packageJson from './package.json';
 
 program
-  .version("0.0.1")
+  .version(packageJson.version)
   .option("-S, --source [file]", "The file to convert.")
   .option(
     "-O, --output-file [fileName]",
