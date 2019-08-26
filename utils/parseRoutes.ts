@@ -51,7 +51,7 @@ function parseRoutes(file: string) {
   });
   parsedFile.program.body.forEach(val => {
     if (val.type === 'ExpressionStatement' && val.expression.type === 'JSXElement') {
-      config.concat(walk(val.expression, parseAttrs));
+      walk(val.expression, parseAttrs);
     }
   })
   return config;
