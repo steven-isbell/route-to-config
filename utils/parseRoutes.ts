@@ -8,7 +8,6 @@ let config: any[] = [];
 function parseAttrs(attrs: JSXAttribute[]) {
   const attributes = {}
   attrs.forEach(val => {
-    // console.log(val.value);
     const { name: { name }, value} = val;
     let actualValue;
     if (name === 'path') {
@@ -21,7 +20,6 @@ function parseAttrs(attrs: JSXAttribute[]) {
       // @ts-ignore
       else actualValue = true;
     } else if(name === 'component') {
-      console.log(value);
       // @ts-ignore
       actualValue = value.expression.name;
     }
@@ -32,7 +30,6 @@ function parseAttrs(attrs: JSXAttribute[]) {
 }
 
 function walk(node: JSXElement, cb: Function = noop) {
-  // console.log('CURRENT NODE: ', node);
   if (node.children.length) {
     node.children.forEach((child) => {
       if (child.type === 'JSXElement') {
