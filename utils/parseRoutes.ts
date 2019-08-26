@@ -1,9 +1,11 @@
 import * as parser from '@babel/parser';
 import { JSXAttribute, JSXElement } from '@babel/types';
 
+import { RouteConfig } from '../@types';
+
 function noop() { }
 
-let config: any[] = [];
+let config: RouteConfig[] = [];
 
 function parseAttrs(attrs: JSXAttribute[]) {
   const attributes = {}
@@ -21,7 +23,7 @@ function parseAttrs(attrs: JSXAttribute[]) {
       else actualValue = true;
     } else if(name === 'component') {
       // @ts-ignore
-      actualValue = value.expression.name;
+      actualValue = new Function(`return ${global[value.expression.name]}`)();
     }
       // @ts-ignore
       attributes[name] = actualValue
@@ -48,6 +50,11 @@ function parseRoutes(file: string) {
     plugins: ['jsx']
   });
   parsedFile.program.body.forEach(val => {
+    if(val.type === 'ImportDeclaration') {
+      const importName = val.specifiers[0].local.name;
+      // @ts-ignore
+      global[importName] = importName
+    }
     if (val.type === 'ExpressionStatement' && val.expression.type === 'JSXElement') {
       walk(val.expression, parseAttrs);
     }
