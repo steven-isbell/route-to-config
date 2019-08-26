@@ -32,8 +32,6 @@ function walk(node: JSXElement, cb: Function = noop) {
         }
       }
     })
-  } else {
-    // console.log('NODE123: ', node);
   }
 }
 
