@@ -1,24 +1,33 @@
 import * as parser from '@babel/parser';
 import { JSXAttribute, JSXElement } from '@babel/types';
 
-function noop() {}
+function noop() { }
+
+let config: any[] = [];
 
 function parseAttrs(attrs: JSXAttribute[]) {
-  return attrs.map(val => {
-    // @ts-ignore
-    const { name: { name }, value: { value } } = val;
+  const attributes = {}
+  attrs.forEach(val => {
+    // console.log(val.value);
+    const { name: { name }, value} = val;
     let actualValue;
-    if (name === 'path' || name === 'component') {
-      actualValue = value;
-    } else if (name === 'exact') {
-      console.log(val);
-      actualValue = true;
-    }
-    return {
+    if (name === 'path') {
       // @ts-ignore
-      [name]: actualValue
+      actualValue = value.value;
+    } else if (name === 'exact') {
+      if(value === null) actualValue = true;
+      // @ts-ignore
+      else if (value.value && (value.value === 'false' || value.value === false)) actualValue = false;
+      // @ts-ignore
+      else actualValue = true;
+    } else if(name === 'component') {
+      // @ts-ignore
+      actualValue = value.expression.name;
     }
+      // @ts-ignore
+      attributes[name] = actualValue
   })
+  return attributes;
 }
 
 function walk(node: JSXElement, cb: Function = noop) {
@@ -28,7 +37,7 @@ function walk(node: JSXElement, cb: Function = noop) {
       if (child.type === 'JSXElement') {
         walk(child);
         if (child.openingElement.attributes.length > 0) {
-          console.log(cb(child.openingElement.attributes));
+          config = config.concat(cb(child.openingElement.attributes));
         }
       }
     })
@@ -42,14 +51,10 @@ function parseRoutes(file: string) {
   });
   parsedFile.program.body.forEach(val => {
     if (val.type === 'ExpressionStatement' && val.expression.type === 'JSXElement') {
-      walk(val.expression, parseAttrs);
+      config.concat(walk(val.expression, parseAttrs));
     }
   })
-  return [{
-    path: 'string',
-    component: 'string',
-    exact: true
-  }];
+  return config;
 }
 
 export default parseRoutes;
