@@ -1,32 +1,28 @@
 import * as parser from '@babel/parser';
-import { JSXAttribute, ExpressionStatement, JSXElement } from '@babel/types';
+import { JSXAttribute, JSXElement } from '@babel/types';
 
-function noop() { }
-
-const config = [];
+function noop() {}
 
 function parseAttrs(attrs: JSXAttribute[]) {
   return attrs.map(val => {
-    console.log('VALUE: ', val);
-    const { name: { name } } = val;
-    let value;
-    if (val.value) {
-      if (name === 'path' || name === 'component') {
-        // @ts-ignore
-        value = val.value.value;
-      } else if (name === 'exact') {
-        value = true;
-      }
+    // @ts-ignore
+    const { name: { name }, value: { value } } = val;
+    let actualValue;
+    if (name === 'path' || name === 'component') {
+      actualValue = value;
+    } else if (name === 'exact') {
+      console.log(val);
+      actualValue = true;
     }
     return {
       // @ts-ignore
-      [name]: value
+      [name]: actualValue
     }
   })
 }
 
 function walk(node: JSXElement, cb: Function = noop) {
-  console.log('CURRENT NODE: ', node);
+  // console.log('CURRENT NODE: ', node);
   if (node.children.length) {
     node.children.forEach((child) => {
       if (child.type === 'JSXElement') {
@@ -48,11 +44,9 @@ function parseRoutes(file: string) {
   });
   parsedFile.program.body.forEach(val => {
     if (val.type === 'ExpressionStatement' && val.expression.type === 'JSXElement') {
-      // @ts-ignore
       walk(val.expression, parseAttrs);
     }
   })
-  // console.log(parsedFile.program.body[0].expression.children[1].openingElement.attributes[2].value);
   return [{
     path: 'string',
     component: 'string',
