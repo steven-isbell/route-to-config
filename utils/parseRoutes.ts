@@ -21,6 +21,7 @@ function parseAttrs(attrs: JSXAttribute[]) {
       // @ts-ignore
       else actualValue = true;
     } else if(name === 'component') {
+      console.log(value);
       // @ts-ignore
       actualValue = value.expression.name;
     }
