@@ -10,7 +10,7 @@
   "main": "./lib/index.js",
   "scripts": {
     "test": "yarn test",
-    "format": "prettier --write",
+    "format": "prettier --write \"*/*.{js,jsx,ts,tsx}\"",
     "build": "tsc && chmod +x lib/cli.js",
     "watch": "tsc -w"
   },
