@@ -47,7 +47,7 @@ function walk(node: JSXElement, cb: Function = noop) {
 function parseRoutes(file: string) {
   const parsedFile = parser.parse(file, {
     sourceType: 'module',
-    plugins: ['jsx']
+    plugins: ['jsx', 'typescript']
   });
   parsedFile.program.body.forEach(val => {
     if(val.type === 'ImportDeclaration') {

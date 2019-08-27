@@ -10,7 +10,7 @@ function validateFile(filePath: string): ValidateFileOutput {
   if (exists && isValidExtension) return { isValid: true };
   return {
     isValid: false,
-    error: !exists ? `File: ${filePath} does not exist.` : `Extension: ${extension} is not of type .js or .jsx`
+    error: !exists ? `File: ${filePath} does not exist.` : `Extension: ${extension} is not of type ${VALID_EXTENSIONS}`
   }
 }
 
