@@ -10,7 +10,6 @@ function writeRouteConfig(outputLocation: string, data: string) {
     }
     return val;
   }).join(',');
-  console.log(formattedData);
   fs.writeFileSync(outputLocation, formattedData);
   console.log(`File written to ${outputLocation}`, formattedData);
   process.exit(1);

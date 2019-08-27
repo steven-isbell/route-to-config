@@ -23,7 +23,7 @@ function parseAttrs(attrs: JSXAttribute[]) {
       else actualValue = true;
     } else if(name === 'component') {
       // @ts-ignore
-      actualValue = new Function(`return ${value.expression.name}`)();
+      actualValue = value.expression.name
     }
       // @ts-ignore
       attributes[name] = actualValue
