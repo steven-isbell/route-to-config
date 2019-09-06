@@ -1,35 +1,36 @@
 import * as parser from '@babel/parser';
-import { JSXAttribute, JSXElement } from '@babel/types';
+import { JSXElement, JSXAttribute } from '@babel/types';
 
 import { RouteConfig } from '../@types';
 
-function noop() {}
+function noop() { }
 
 let config: RouteConfig[] = [];
 
 function parseAttrs(attrs: JSXAttribute[]) {
-  const attributes = {};
+  const attributes: { [key: string]: string | boolean | undefined; } = {};
   attrs.forEach(val => {
     const {
       name: { name },
       value,
     } = val;
     let actualValue;
-    if (name === 'path' && value) {
+    if (name === 'path' && value && value.type === 'StringLiteral') {
       actualValue = value.value;
     } else if (name === 'exact') {
       if (value === null) actualValue = true;
       else if (
         value &&
+        value.type === 'StringLiteral' &&
         value.value &&
-        (value.value === 'false' || value.value === false)
+        (value.value === 'false')
       )
         actualValue = false;
       else actualValue = true;
-    } else if (name === 'component' && value) {
+    } else if (name === 'component' && value && value.type === 'JSXExpressionContainer' && value.expression.type === 'Identifier') {
       actualValue = value.expression.name;
     }
-    attributes[name] = actualValue;
+    if (typeof name === 'string') attributes[name] = actualValue;
   });
   return attributes;
 }
