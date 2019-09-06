@@ -15,7 +15,7 @@ program
     "The name of the output file. Defaults to routes.js."
   )
   .option(
-    "-P, --output-path",
+    "-P, --output-path [directoryPath]",
     "The output path. Defaults to the directory command was executed in."
   )
   .parse(process.argv);
@@ -27,8 +27,7 @@ program
     if (!isValid) throw new Error(error);
     const parsedFile: string = fs.readFileSync(source, 'utf8');
     const routeConfig: RouteConfig[] = parseRoutes(parsedFile);
-    // Add imports before writing file
-    const outputLocation: string = outputPath ? `${outputPath}/${actualOutputFile}`.replace(/\/\//g, '/') : `${__dirname}/${actualOutputFile}`;
+    const outputLocation: string = outputPath ? `${outputPath}/${actualOutputFile}`.replace(/\/\//g, '/') : `${process.cwd()}/${actualOutputFile}`;
     writeRouteConfig(outputLocation, JSON.stringify(routeConfig));
   } catch (e) {
     console.error(e.message);
