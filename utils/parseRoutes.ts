@@ -15,24 +15,20 @@ function parseAttrs(attrs: JSXAttribute[]) {
       value,
     } = val;
     let actualValue;
-    if (name === 'path') {
-      // @ts-ignore
+    if (name === 'path' && value) {
       actualValue = value.value;
     } else if (name === 'exact') {
       if (value === null) actualValue = true;
-      // @ts-ignore
       else if (
+        value &&
         value.value &&
         (value.value === 'false' || value.value === false)
       )
         actualValue = false;
-      // @ts-ignore
       else actualValue = true;
-    } else if (name === 'component') {
-      // @ts-ignore
+    } else if (name === 'component' && value) {
       actualValue = value.expression.name;
     }
-    // @ts-ignore
     attributes[name] = actualValue;
   });
   return attributes;
@@ -59,7 +55,6 @@ function parseRoutes(file: string) {
   parsedFile.program.body.forEach(val => {
     if (val.type === 'ImportDeclaration') {
       const importName = val.specifiers[0].local.name;
-      // @ts-ignore
       global[importName] = importName;
     }
     if (
