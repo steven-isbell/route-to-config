@@ -27,10 +27,13 @@ program
     const { isValid, error }: ValidateFileOutput = validateFile(source);
     if (!isValid) throw new Error(error);
     const parsedFile: string = fs.readFileSync(source, 'utf8');
-    const importList: string = buildImportList(parsedFile);
+    const importList: string | undefined = buildImportList(parsedFile);
     const routeConfig: RouteConfig[] = parseRoutes(parsedFile);
     const outputLocation: string = outputPath ? `${outputPath}/${actualOutputFile}`.replace(/\/\//g, '/') : `${process.cwd()}/${actualOutputFile}`;
-    writeRouteConfig(outputLocation, importList + '\n' + JSON.stringify(routeConfig));
+    const outputData: string = importList ? `${importList}
+
+${JSON.stringify(routeConfig)}` : JSON.stringify(routeConfig);
+    writeRouteConfig(outputLocation, outputData);
   } catch (e) {
     console.error(e.message);
     process.exit(2);

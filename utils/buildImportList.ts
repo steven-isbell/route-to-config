@@ -1,4 +1,5 @@
-function buildImportList(file: string) {
+function buildImportList(file: string): string | undefined {
+  if(!file.includes('import')) return;
   const lines = file.split('\n');
   const imports: string[] = [];
   lines.forEach(val => {
