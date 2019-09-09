@@ -1,18 +1,24 @@
 module.exports = {
-    "env": {
-        "browser": true,
-        "es6": true
+    env: {
+        es6: true,
+        node: true,
     },
-    "extends": ["eslint:recommended", "airbnb"],
-    "globals": {
-        "Atomics": "readonly",
-        "SharedArrayBuffer": "readonly"
+    extends: [
+        'eslint:recommended',
+        'airbnb', 'plugin:@typescript-eslint/recommended',
+        'prettier/@typescript-eslint',
+        'plugin:prettier/recommended'
+    ],
+    plugins: ['@typescript-eslint', 'prettier'],
+    globals: {
+        'Atomics': 'readonly',
+        'SharedArrayBuffer': 'readonly'
     },
-    "parser": "@typescript-eslint/parser",
-    "parserOptions": {
-        "ecmaVersion": 2018,
-        "sourceType": "module",
+    parser: '@typescript-eslint/parser',
+    parserOptions: {
+        ecmaVersion: 2018,
+        sourceType: 'module',
     },
-    "rules": {
+    rules: {
     }
 };

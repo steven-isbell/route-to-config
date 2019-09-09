@@ -6,6 +6,7 @@ import fs from 'fs';
 import { parseRoutes, validateFile, writeRouteConfig } from "./utils";
 import { RouteConfig, ValidateFileOutput } from "./@types";
 import packageJson from './package.json';
+import buildImportList from "./utils/buildImportList";
 
 program
   .version(packageJson.version)
@@ -26,9 +27,10 @@ program
     const { isValid, error }: ValidateFileOutput = validateFile(source);
     if (!isValid) throw new Error(error);
     const parsedFile: string = fs.readFileSync(source, 'utf8');
+    const importList: string = buildImportList(parsedFile);
     const routeConfig: RouteConfig[] = parseRoutes(parsedFile);
     const outputLocation: string = outputPath ? `${outputPath}/${actualOutputFile}`.replace(/\/\//g, '/') : `${process.cwd()}/${actualOutputFile}`;
-    writeRouteConfig(outputLocation, JSON.stringify(routeConfig));
+    writeRouteConfig(outputLocation, importList + '\n' + JSON.stringify(routeConfig));
   } catch (e) {
     console.error(e.message);
     process.exit(2);
