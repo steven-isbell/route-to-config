@@ -1,6 +1,6 @@
 {
   "name": "react-route-to-config",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Convert a list of routes into a configuration object.",
   "keywords": [
     "react",
