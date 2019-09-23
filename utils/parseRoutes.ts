@@ -3,12 +3,12 @@ import { JSXElement, JSXAttribute } from '@babel/types';
 
 import { RouteConfig } from '../@types';
 
-function noop() { }
+function noop() {}
 
 let config: RouteConfig[] = [];
 
 function parseAttrs(attrs: JSXAttribute[]) {
-  const attributes: { [key: string]: string | boolean | undefined; } = {};
+  const attributes: { [key: string]: string | boolean | undefined } = {};
   attrs.forEach(val => {
     const {
       name: { name },
@@ -23,11 +23,16 @@ function parseAttrs(attrs: JSXAttribute[]) {
         value &&
         value.type === 'StringLiteral' &&
         value.value &&
-        (value.value === 'false')
+        value.value === 'false'
       )
         actualValue = false;
       else actualValue = true;
-    } else if (name === 'component' && value && value.type === 'JSXExpressionContainer' && value.expression.type === 'Identifier') {
+    } else if (
+      name === 'component' &&
+      value &&
+      value.type === 'JSXExpressionContainer' &&
+      value.expression.type === 'Identifier'
+    ) {
       actualValue = value.expression.name;
     }
     if (typeof name === 'string') attributes[name] = actualValue;
