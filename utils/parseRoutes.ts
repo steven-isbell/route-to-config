@@ -1,14 +1,14 @@
 import * as parser from '@babel/parser';
 import { JSXElement, JSXAttribute } from '@babel/types';
 
-import { RouteConfig } from '../@types';
+import { RouteConfig, RouteAttrs } from '../@types';
 
 function noop() {}
 
 let config: RouteConfig[] = [];
 
 function parseAttrs(attrs: JSXAttribute[]) {
-  const attributes: { [key: string]: string | boolean | undefined } = {};
+  const attributes = <RouteAttrs>{};
   attrs.forEach(val => {
     const {
       name: { name },
